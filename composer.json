@@ -1,0 +1,17 @@
+{
+    "name": "byteforge88/authpe",
+    "description": "Simple authenticator for PocketMine-MP",
+    "type": "project",
+    "license": "LGPL-3.0",
+    "autoload": {
+        "psr-4": {
+            "Byteforge88\\Authpe\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ByteForge88"
+        }
+    ],
+    "require": {}
+}

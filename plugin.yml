@@ -1,0 +1,9 @@
+name: AuthPE
+version: 1.0.0
+author: ByteForge88
+api: 5.41.0
+main: byteforge88\authpe\AuthPE
+
+permissions:
+  authpe.register:
+    default: true

@@ -13,13 +13,13 @@ use byteforge88\authpe\AuthPE;
 
 use byteforge88\authpe\password\Password;
 
-class RegisterCommand extends AuthCommand {
+class LoginCommand extends AuthCommand {
     
     public function __construct(protected AuthPE $plugin) {
-        parent::__construct("register", $this->plugin);
-        $this->setDescription("Register your account to get access to the server");
-        $this->setUsage("/register <password>");
-        $this->setPermission("authpe.register");
+        parent::__construct("login", $this->plugin);
+        $this->setDescription("Login in to play on this server");
+        $this->setUsage("/login <password>");
+        $this->setPermission("authpe.login");
     }
     
     public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
@@ -35,12 +35,17 @@ class RegisterCommand extends AuthCommand {
         
         $password_manager = Password::getInstance();
         
-        if (!$password_manager->isNew($sender)) {
-            $sender->sendMessage("You have already registered, Please use /login instead!");
+        if ($password_manager->isNew($sender)) {
+            $sender->sendMessage("You haven't registered yet, Register by doing /register!");
             return;
         }
         
-        $password_manager->register($sender, $args[0]);
-        $sender->sendMessage("You have been registered, use /login to continue!");
+        if ($password_manager->matchPassword($sender, $args[0]) === false) {
+            $sender->sendMessage("Incorrect password!");
+            return;
+        }
+        
+        $sender->setNoClientPredictions(false);
+        $sender->sendMessage("You have successfully logged in!");
     }
 }

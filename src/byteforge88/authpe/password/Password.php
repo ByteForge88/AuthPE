@@ -28,7 +28,20 @@ class Password {
     }
     
     public function isNew(Player $player) : bool{
-        //TODO!!!
+        $stmt = Database::getInstance()->getSQL()->prepare("SELECT * FROM passwords WHERE player = :player;");
+        
+        try {
+            $stmt->bindValue(":player", $player->getName(), SQLITE3_TEXT);
+            
+            $result = $stmt->execute();
+            $data = $result->fetchArray(SQLITE3_ASSOC);
+            
+            $result->finalize();
+            
+            return $data === false ? true : false;
+        } finally {
+            $stmt->close();
+        }
     }
     
     public function getPassword(Player $player) : ?string{

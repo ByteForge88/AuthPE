@@ -1,9 +1,11 @@
 name: AuthPE
 version: 1.0.0
 author: ByteForge88
-api: 5.41.0
+api: 5.43.1
 main: byteforge88\authpe\AuthPE
 
 permissions:
   authpe.register:
+    default: true
+  authpe.login:
     default: true

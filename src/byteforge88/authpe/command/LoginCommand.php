@@ -45,7 +45,13 @@ class LoginCommand extends AuthCommand {
             return;
         }
         
+        if (!$password_manager->isFrozen($sender)) {
+            $sender->sendMessage("You are already logged in!");
+            return;
+        }
+        
         $sender->setNoClientPredictions(false);
+        $password_manager->unfreeze($sender);
         $sender->sendMessage("You have successfully logged in!");
     }
 }

@@ -11,11 +11,11 @@ use pocketmine\utils\SingletonTrait;
 use byteforge88\authpe\AuthPE;
 
 class Database {
-    use SingeltonTrait;
+    use SingletonTrait;
     
     protected AuthPE $plugin;
     
-    private function __construct(AuthPE $plugin) {
+    private function __construct() {
         $folder = AuthPE::getInstance()->getDataFolder() . "database/";
         
         @mkdir($folder);
@@ -26,7 +26,7 @@ class Database {
     }
     
     public function close() : void{
-        return $this->sql->close();
+        $this->sql->close();
     }
     
     public function getSQL() : SQLite3{

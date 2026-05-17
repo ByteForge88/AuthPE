@@ -16,7 +16,7 @@ use byteforge88\authpe\AuthPE;
  * Perhaps we should use Commando instead?
  * For now we'll use the 'legacy' Command system.
  */
-abstract class AuthCommand extends Command implements PluginBase {
+abstract class AuthCommand extends Command implements PluginOwned {
     
     protected AuthPE $plugin;
     
